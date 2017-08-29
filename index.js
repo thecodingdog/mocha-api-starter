@@ -5,9 +5,11 @@ var mongoose = require('mongoose')
 var tacosController = require('./controllers/tacos_controller')
 var app = express()
 
-mongoose.connect('mongodb://localhost/taco-api')
+mongoose.connect('mongodb://localhost/taco-api', {
+  useMongoClient: true
+})
 
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -17,8 +19,9 @@ app.get('/', function (req, res) {
 
 app.use('/tacos', tacosController)
 
-var server = app.listen(process.env.PORT || 3000)
-console.log('Server UP')
+// prevent the app from starting twice if tests are running.
+app.listen(process.env.PORT || 3000)
+console.log('Server UP at localhost:3000')
 
 // we export the running server so we can use it in testing
-module.exports = server
+module.exports = app

@@ -5,7 +5,7 @@ var Taco = require('../models/taco')
 router.get('/', function (req, res) {
   Taco.find({}, function (err, tacos) {
     if (err) res.status(404).json({msg: 'cannot find any tacos'})
-    else res.json(tacos)
+    else res.json(tacos) // => []
   })
 })
 
