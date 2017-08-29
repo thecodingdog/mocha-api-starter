@@ -1,0 +1,2 @@
+language: node_js
+script: NODE_ENV=test mocha test/index_tests
